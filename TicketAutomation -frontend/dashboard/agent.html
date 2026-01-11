@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Dashboard - Ticket Automation</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand">Support Agent Dashboard</span>
+    <button class="btn btn-danger" onclick="logout()">Logout</button>
+</nav>
+
+<div class="container mt-4">
+
+    <h5 id="agentInfo" class="mb-4"></h5>
+
+    <!-- ASSIGNED TICKETS -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h6 class="mb-3">My Assigned Tickets</h6>
+
+            <div class="table-responsive">
+                <table class="table table-sm align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- AI SUMMARY MODAL -->
+<div class="modal fade" id="summaryModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">AI Ticket Summary</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p id="aiSummary"></p>
+                <hr>
+                <p><strong>Predicted Category:</strong> <span id="predictedCategory"></span></p>
+                <p><strong>Predicted Priority:</strong> <span id="predictedPriority"></span></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MESSAGE MODAL -->
+<div class="modal fade" id="messageModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Conversation</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+
+            </div>
+
+            <div class="modal-body" id="chatMessages"
+                 style="max-height:400px; overflow-y:auto;"></div>
+
+            <div class="modal-footer flex-column">
+                <div class="input-group w-100">
+                    <input id="chatInput" class="form-control" placeholder="Type message">
+                    <button id="sendBtn" class="btn btn-primary" onclick="sendAgentMessage()">Send</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/agent.js"></script>
+
+</body>
+</html>
