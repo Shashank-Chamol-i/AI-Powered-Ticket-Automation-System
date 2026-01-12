@@ -41,7 +41,7 @@ function loadUserTickets() {
     fetch("http://localhost:8080/api/ticket/user", { headers: authHeader() })
         .then(res => res.json())
         .then(renderTicketList)
-        .catch(err => alert("Failed to load tickets"));
+        .catch(err => alert("No Tickets Created Yet : "));
 }
 
 // ===============================

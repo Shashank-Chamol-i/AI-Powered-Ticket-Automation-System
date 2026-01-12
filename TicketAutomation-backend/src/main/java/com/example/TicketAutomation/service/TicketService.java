@@ -122,7 +122,7 @@ public class TicketService {
 
     public List<TicketDetailResponse> getUserTicket (String userId){
         if(ticketRepository.findByCreatedById(userId).isEmpty()){
-            throw new NoSuchUserExist("No such User Exist :");
+            throw new NoSuchUserExist("No Tickets Created yet : ");
         }else{
             return ticketRepository.findByCreatedById(userId)
                     .stream()
