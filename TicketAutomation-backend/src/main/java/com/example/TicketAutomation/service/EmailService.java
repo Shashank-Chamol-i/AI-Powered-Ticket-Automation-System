@@ -5,6 +5,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ import java.util.concurrent.Executor;
 public class EmailService {
     private final JavaMailSender mailSender;
     private final Executor emailExecutor;
-
+    @Value("${spring.mail.username}")
+    private String emailOwner;
 
     public void sendEmail(String email, String subject, String body) {
         emailExecutor.execute(()->{
@@ -28,7 +30,7 @@ public class EmailService {
                 helper.setTo(email);
                 helper.setSubject(subject);
                 helper.setText(body,true);
-                helper.setFrom(new InternetAddress("shashankchamoli069@gmail.com","Ticket-Automation"));
+                helper.setFrom(new InternetAddress(emailOwner,"Ticket-Automation"));
                 mailSender.send(message);
 
             } catch (MessagingException | UnsupportedEncodingException e) {

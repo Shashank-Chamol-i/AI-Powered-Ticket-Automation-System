@@ -20,6 +20,7 @@ function register() {
         return;
     }
 
+
     // 4. Send request
     fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
