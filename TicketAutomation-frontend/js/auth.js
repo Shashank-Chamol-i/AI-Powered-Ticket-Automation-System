@@ -1,3 +1,4 @@
+window.API_BASE_URL="https://ticket-auto-6wwn.onrender.com";
 function saveToken(token) {
     localStorage.setItem("token", token);
 }

@@ -1,4 +1,3 @@
-# ---- Build stage ----
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
@@ -10,11 +9,9 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 
-# Copy jar from build stage
-COPY --from=build /app/target/ticketautomation-0.0.1-SNAPSHOT.jar .
+# Copy and rename for simplicity (no version in filename)
+COPY --from=build /app/target/ticketautomation-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose Spring Boot port
 EXPOSE 8080
 
-# Run app
-ENTRYPOINT ["java", "-jar", "app/ticketautomation-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

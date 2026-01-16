@@ -22,7 +22,7 @@ function register() {
 
 
     // 4. Send request
-    fetch("http://localhost:8080/api/auth/register", {
+    fetch(`${window.API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

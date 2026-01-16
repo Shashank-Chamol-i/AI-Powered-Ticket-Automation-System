@@ -38,7 +38,7 @@ function showSection(sectionId) {
 function loadUserTickets() {
     showSection("ticketListSection");
 
-    fetch("http://localhost:8080/api/ticket/user", { headers: authHeader() })
+    fetch(`${window.API_BASE_URL}/api/ticket/user`, { headers: authHeader() })
         .then(res => res.json())
         .then(renderTicketList)
         .catch(err => alert("No Tickets Created Yet : "));
@@ -85,7 +85,7 @@ function renderTicketList(tickets) {
 function confirmDelete(ticketId) {
     if (!confirm("Are you sure you want to delete this ticket?")) return;
 
-    fetch(`http://localhost:8080/api/ticket/${ticketId}`, {
+    fetch(`${window.API_BASE_URL}/api/ticket/${ticketId}`, {
         method: "DELETE",
         headers: authHeader()
     })
@@ -103,7 +103,7 @@ function viewTicketDetails(ticketId) {
     currentTicketId = ticketId;
     showSection("ticketDetailSection");
 
-    fetch(`http://localhost:8080/api/ticket/${ticketId}`, { headers: authHeader() })
+    fetch(`${window.API_BASE_URL}/api/ticket/${ticketId}`, { headers: authHeader() })
         .then(res => res.json())
         .then(ticket => {
             const isClosed = ticket.status === "CLOSED";
@@ -165,7 +165,7 @@ function viewTicketDetails(ticketId) {
 function confirmCloseTicket(ticketId) {
     if (!confirm("Do you want to close this ticket?")) return;
 
-    fetch(`http://localhost:8080/api/ticket/user/close?TID=${ticketId}`, {
+    fetch(`${window.API_BASE_URL}/api/ticket/user/close?TID=${ticketId}`, {
         method: "POST",
         headers: authHeader()
     })
@@ -181,7 +181,7 @@ function searchTicketById() {
     const ticketId = document.getElementById("searchTicketId").value.trim();
     if (!ticketId) return;
 
-    fetch(`http://localhost:8080/api/ticket/${ticketId}`, { headers: authHeader() })
+    fetch(`${window.API_BASE_URL}/api/ticket/${ticketId}`, { headers: authHeader() })
         .then(res => {
             if (!res.ok) throw new Error("Ticket not found");
             return res.json();
@@ -202,7 +202,7 @@ function applyFilters() {
         .filter(Boolean)
         .join("&");
 
-    fetch(`http://localhost:8080/api/ticket/filter?${query}`, { headers: authHeader() })
+    fetch(`${window.API_BASE_URL}/api/ticket/filter?${query}`, { headers: authHeader() })
         .then(res => res.json())
         .then(renderTicketList)
         .catch(err => alert("Failed to apply filters"));
@@ -221,7 +221,7 @@ function resetFilters() {
 function fetchSummary() {
     if (!currentTicketId) return;
 
-    fetch(`http://localhost:8080/api/analysis/summary?TID=${currentTicketId}`, {
+    fetch(`${window.API_BASE_URL}/api/analysis/summary?TID=${currentTicketId}`, {
         headers: authHeader()
     })
         .then(res => res.json())
@@ -246,7 +246,7 @@ function createTicket() {
         return;
     }
 
-    fetch("http://localhost:8080/api/ticket/create", {
+    fetch(`${window.API_BASE_URL}/api/ticket/create`, {
         method: "POST",
         headers: authHeader(),
         body: JSON.stringify({ title, description, category })

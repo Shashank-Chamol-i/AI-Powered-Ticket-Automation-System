@@ -47,7 +47,7 @@ function closeMessageModal() {
 // ===============================
 function loadConversation(ticketId) {
 
-    fetch(`http://localhost:8080/api/message/conversation?TID=${ticketId}`, {
+    fetch(`${window.API_BASE_URL}/api/message/conversation?TID=${ticketId}`, {
         headers: authHeader()
     })
     .then(res => res.json())
@@ -106,7 +106,7 @@ function sendMessage() {
 
     if (!message || !activeChatTicketId) return;
 
-    fetch("http://localhost:8080/api/message/user/send", {
+    fetch(`${window.API_BASE_URL}/api/message/user/send`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token"),

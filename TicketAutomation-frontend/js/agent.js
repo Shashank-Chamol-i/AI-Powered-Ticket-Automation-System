@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 function loadAssignedTickets() {
 
-    fetch("http://localhost:8080/api/ticket/assignTicket", {
+    fetch(`${window.API_BASE_URL}/api/ticket/assignTicket`, {
         headers: { "Authorization": "Bearer " + getToken() }
     })
     .then(res => res.json())
@@ -155,7 +155,7 @@ function viewSummary(ticketId) {
 
 function fetchSummary(ticketId) {
 
-    fetch(`http://localhost:8080/api/analysis/summary?TID=${ticketId}`, {
+    fetch(`${window.API_BASE_URL}/api/analysis/summary?TID=${ticketId}`, {
         headers: { "Authorization": "Bearer " + getToken() }
     })
     .then(res => res.json())
@@ -176,7 +176,7 @@ function assignPriority(ticketId, priority) {
 
     if (!priority) return;
 
-    fetch("http://localhost:8080/api/ticket/agent/action", {
+    fetch(`${window.API_BASE_URL}/api/ticket/agent/action`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + getToken(),
@@ -194,7 +194,7 @@ function resolveTicket(ticketId) {
 
     if (!confirm("Resolve this ticket?")) return;
 
-    fetch("http://localhost:8080/api/ticket/agent/resolve", {
+    fetch(`${window.API_BASE_URL}/api/ticket/agent/resolve`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + getToken(),
@@ -236,7 +236,7 @@ function openMessageModal(ticketId, status) {
 // ===============================
 function loadConversation(ticketId) {
 
-    fetch(`http://localhost:8080/api/message/conversation?TID=${ticketId}`, {
+    fetch(`${window.API_BASE_URL}/api/message/conversation?TID=${ticketId}`, {
         headers: { "Authorization": "Bearer " + getToken() }
     })
     .then(res => res.json())
@@ -279,7 +279,7 @@ function sendAgentMessage() {
     const msg = document.getElementById("chatInput").value.trim();
     if (!msg || !activeTicketId) return;
 
-    fetch(`http://localhost:8080/api/message/agent/send?TID=${activeTicketId}`, {
+    fetch(`${window.API_BASE_URL}/api/message/agent/send?TID=${activeTicketId}`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + getToken(),

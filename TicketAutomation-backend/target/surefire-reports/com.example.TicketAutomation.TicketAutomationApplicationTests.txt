@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.TicketAutomation.TicketAutomationApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.74 s -- in com.example.TicketAutomation.TicketAutomationApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 58.51 s -- in com.example.TicketAutomation.TicketAutomationApplicationTests

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Load agents before tickets
 function loadAgents() {
-    return fetch("http://localhost:8080/api/ticket/agent", {
+    return fetch(`${window.API_BASE_URL}/api/ticket/agent`, {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
@@ -30,7 +30,7 @@ function loadAgents() {
 }
 
 function loadUnassignedTickets() {
-    fetch("http://localhost:8080/api/ticket/list", {
+    fetch(`${window.API_BASE_URL}/api/ticket/list`, {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
@@ -116,7 +116,7 @@ function assignTicket(btn, ticketId) {
         return;
     }
 
-    fetch(`http://localhost:8080/api/ticket/assign?TID=${ticketId}&AID=${agentId}`, {
+    fetch(`${window.API_BASE_URL}/api/ticket/assign?TID=${ticketId}&AID=${agentId}`, {
         method: "POST",
         headers: { "Authorization": "Bearer " + getToken() }
     })
@@ -131,7 +131,7 @@ function assignTicket(btn, ticketId) {
 // USERS LOADING
 
 function loadUsers() {
-    fetch("http://localhost:8080/api/ticket/get/list", {
+    fetch(`${window.API_BASE_URL}/api/ticket/get/list`, {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
@@ -193,7 +193,7 @@ function roleColor(role) {
 function createAgent(userId) {
     if (!confirm("Are you sure you want to promote this user to Support Agent?")) return;
 
-    fetch(`http://localhost:8080/api/ticket/create/agent?userId=${userId}`, {
+    fetch(window.API_BASE_URL+`/api/ticket/create/agent?userId=${userId}`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + getToken()
